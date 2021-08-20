@@ -1,8 +1,9 @@
 <h1>BYJU'S Lab Content Helper</h1>
 
 <hr>
-<label for="title">Name of the diagram </label>
-<input type="text" [(ngModel)]='title' name="title" rows="5" cols="50">
+<h2> Diagrams </h2>
+<label for="diagramTitle">Name of the diagram (no spaces)</label>
+<input type="text" [(ngModel)]='diagramTitle' name="diagramTitle" rows="5" cols="50">
 
 <br> <br>
 
@@ -11,17 +12,41 @@
 
 <br> <br>
 
-<label for="thumbnail">Greyscale Image </label>
+<label for="greyscale">Greyscale Image </label>
 <input type="file" name="greyscale" accept=".png" (change)="onGreyscaleFileChanged($event)">
 
 <br> <br>
 
-<label for="thumbnail">Labelled Image </label>
+<label for="labelled">Labelled Image </label>
 <input type="file" name="labelled" accept=".png" (change)="onLabelledFileChanged($event)">
 
 <br> <br>
 
-<button (click)="download()">Process and download zip</button>
+<button (click)="downloadDiagramZip()">Process and download diagram zip</button>
 
 <hr>
+
+<h2> Simulations </h2>
+<label for="simulationTitle">Name of the simulation (no spaces) </label>
+<input type="text" [(ngModel)]='simulationTitle' name="simulationTitle" rows="5" cols="50">
+
+<br> <br>
+
+<label for="simulationThumbnail">Thumbnail image </label>
+<input type="file" name="simulationThumbnail" accept=".png" (change)="onSimulationThumbnailFileChanged($event)">
+
+<br> <br>
+
+<label for="datafile">Data file </label>
+<input type="file" name="datafile" (change)="onDataFileChanged($event)">
+
+<br> <br>
+
+<label for="thumbnail">Manifest file </label>
+<input type="file" name="labelled" (change)="onManifestFileChanged($event)">
+
+<br> <br>
+
+<button (click)="downloadSimulationZip()">Process and download simulation zip</button>
+
 

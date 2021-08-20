@@ -1,3 +1,6 @@
+		
+
+
 import { Component, VERSION } from "@angular/core";
 import { saveAs } from "file-saver";
 import * as JSZip from 'jszip';
@@ -10,11 +13,15 @@ import * as JSZip from 'jszip';
 })
 export class AppComponent {
   name = "BYJU'S Lab Content Helper"
-  title = '';
+  diagramTitle = '';
+  simulationTitle = '';
   uploadFiles: any;
   thumbnailImage : any;
   labelledImage : any;
   greyscaleImage : any;
+  simulationImage : any;
+  dataFile: any;
+  manifestFile: any;
 
   /*handleFileInput(files: any) {
     this.uploadFiles = files;
@@ -32,11 +39,22 @@ export class AppComponent {
     this.greyscaleImage = event.target.files[0];
   }
 
+  onSimulationThumbnailFileChanged(event:any){
+    this.simulationImage = event.target.files[0];
+  }
 
-  download = async () => {
+  onDataFileChanged(event:any){
+    this.dataFile = event.target.files[0];
+  }
+
+  onManifestFileChanged(event:any){
+    this.manifestFile = event.target.files[0];
+  }
+
+  downloadDiagramZip = async () => {
     const zip = new JSZip();
 
-    var folderName = this.title;
+    var folderName = this.diagramTitle;
 
     // @ts-ignore: Object is possibly 'null'.
     zip.folder("thumbnail").file("thumbnail_" + folderName + ".png", this.thumbnailImage);
@@ -49,5 +67,27 @@ export class AppComponent {
     .then(function(content) {
         saveAs(content,  folderName + ".zip");
     });
+      
   };
+
+  downloadSimulationZip = async () => {
+    const zip = new JSZip();
+
+    var folderName = this.simulationTitle;
+
+    // @ts-ignore: Object is possibly 'null'.
+    zip.folder("thumbnail").file("thumbnail_" + folderName + ".png", this.thumbnailImage);
+    //@ts-ignore: Object is possibly 'null'.
+    zip.folder("simulation").file(this.dataFile.name, this.dataFile);
+    //@ts-ignore: Object is possibly 'null'.
+    zip.folder("simulation").file(this.manifestFile.name, this.manifestFile);
+
+    zip.generateAsync({type:"blob"})
+    .then(function(content) {
+        saveAs(content,  folderName + ".zip");
+    });
+      
+  };
+
 }
+
